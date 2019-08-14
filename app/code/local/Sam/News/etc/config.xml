@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Sam_News>
+      <version>0.1.0</version>
+    </Sam_News>
+  </modules>
+  <frontend>
+    <routers>
+      <news>
+        <use>standard</use>
+          <args>
+            <module>Sam_News</module>
+            <frontName>news</frontName>
+          </args>
+      </news>
+    </routers>
+		<layout>
+		  <updates>
+			<news>
+			  <file>news.xml</file>
+			</news>
+		  </updates>
+		</layout>
+  </frontend>
+  <global>
+    <helpers>
+      <news>
+        <class>Sam_News_Helper</class>
+      </news>
+    </helpers>
+	<blocks>
+	  <news>
+		<class>Sam_News_Block</class>
+	  </news>
+	</blocks>
+	<models>
+	  <news>
+		<class>Sam_News_Model</class>
+		<resourceModel>news_mysql4</resourceModel>
+	  </news>
+	  <news_mysql4>
+		<class>Sam_News_Model_Mysql4</class>
+		<entities>		  
+			  <news>
+				<table>news</table>
+			  </news>
+        </entities>
+	  </news_mysql4>
+	</models>
+	<resources>
+	  <news_setup>
+		<setup>
+		  <module>Sam_News</module>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </news_setup>
+	  <news_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </news_write>
+	  <news_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </news_read>
+	</resources>
+	
+	<events>
+		<controller_action_layout_generate_blocks_before>
+			<observers>
+				<sam_news_observer>
+					<type>singleton</type>
+					<class>Sam_News_Model_Observer</class>
+					<method>set_block</method>
+				</sam_news_observer>
+			</observers>
+		</controller_action_layout_generate_blocks_before>     
+	</events>
+  </global>
+  <admin>
+	<routers>
+	  <news>
+	    <use>admin</use>
+		<args>
+		  <module>Sam_News</module>
+		  <frontName>news</frontName>
+		</args>
+	  </news>
+	</routers>
+  </admin>
+  <adminhtml>
+	<menu>
+	  <news module="news">
+		<title>News</title>
+		<sort_order>60</sort_order>
+		<children>
+		  <news module="news">
+		    <title>Manage News</title>
+			<sort_order>0</sort_order>
+			<action>news/adminhtml_news</action>
+		  </news>
+		  <newssettings module="news">
+		    <title>News Settings</title>
+			<sort_order>10</sort_order>
+			<action>adminhtml/system_config/edit/section/newssection</action>
+		  </newssettings>
+		</children>
+	  </news>
+	</menu>
+	<acl>
+	  <resources>
+		<all>
+		  <title>Allow Everything</title>
+		</all>
+		<admin>
+		  <children>
+			<news translate="title" module="news">
+			  <title>News</title>
+			  <sort_order>1000</sort_order>
+			  <children>
+				  <news translate="title">
+					<title>Manage News</title>
+					<sort_order>0</sort_order>
+				  </news>
+				  <newssettings translate="title">
+					<title>News Settings</title>
+					<sort_order>10</sort_order>
+				  </newssettings>
+			  </children>
+			</news>
+			<system>
+                            <children>
+                                <config>
+                                        <children>
+                                            <newssection translate="title" module="news">
+                                                <title>News Section ACL</title>
+                                                <sort_order>99</sort_order>
+                                            </newssection>
+                                        </children>
+                                </config>
+                            </children>
+                        </system>
+		  </children>
+		</admin>
+	  </resources>
+	</acl>
+	<layout>
+	  <updates>
+		<news>
+		  <file>news.xml</file>
+		</news>
+	  </updates>
+	</layout>
+  </adminhtml>
+</config> 

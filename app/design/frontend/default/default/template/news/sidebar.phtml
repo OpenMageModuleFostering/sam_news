@@ -1,0 +1,136 @@
+<script type="text/javascript">
+	var $j = jQuery.noConflict();
+	$j(document).ready(function(){
+		$j('#sam_scroller_slider').cycle({
+			fx: 'fade',
+			speed: 'fast',
+			timeout: 3000,
+			next: '#next_news',
+			prev: '#prev_news'
+		});
+		$j('#sam_news_scrollbar').tinyscrollbar();	
+	}); 
+</script>
+<?php $news = $this->getNews(); ?>
+<?php //echo $news->count(); die; ?>
+<?php if($news->count()) : ?>
+<?php if($this->getViewMode() == 'slider'):?>
+<div class="sam-block">
+	<div class="sam-block-title">
+    	<strong><span><a href="<?php echo $this->getUrl('news');?>" title="<?php echo $this->__('Latest News'); ?>"><?php echo $this->__('Latest News'); ?></a></span></strong>
+    </div>
+    <div id="sam_scroller_slider" class="sam-block-content">
+    	<?php $i=0;foreach ($news as $_news): ?>
+            <?php if ($i++%2==0): ?>
+        	<div class="sam_scroller_item">
+            <?php endif; ?>
+            	<div class="sam_scroller_item">
+                	<div class="sam_scroller_item_pimage">
+                    	<a href="<?php echo $_news->getNewsUrl();?>" title="<?php echo $_news->getTitle(); ?>"><img src="<?php echo Mage::helper('news/image')->getImageresize($_news->getImage(),'small',40,40);?>" alt="<?php echo $_news->getTitle(); ?>"  width="40" height="40"/></a>
+                    </div>
+                    <div class="sam_scroller_item_info">
+                    	<div class="sam_scroller_item_pname">
+                        	<a href="<?php echo $_news->getNewsUrl();?>" title="<?php echo $_news->getTitle(); ?>"><?php echo $_news->getTitle(); ?></a>
+                        </div>
+                    </div>
+                    <div class="sam_news_item_clear"></div>
+                    <div>
+                        <div><?php echo $_news->getShortDescription();?></div>
+                    </div>
+                </div>
+            <?php if ($i%2==0): ?>
+            </div>
+            <?php elseif($this->getCount() == $i): ?>
+            </div>
+            <?php endif; ?>
+        <?php endforeach;?>
+    </div>
+    <div class="sam-block-title">
+    	<strong class="sam-block-title-bottom" style="float:left;">
+        	<a id="prev_news" href="#">Previous</a>
+            |
+            <a id="next_news" href="#">Next</a>
+        </strong>
+        <strong class="sam-block-title-bottom" style="float:right;">
+        	<a href="<?php echo $this->getUrl('news');?>"><?php echo $this->__('View All'); ?></a>
+        </strong>
+    </div>
+</div>
+<div class="sam_news_item_clear" style="width:100%;"></div>
+<?php elseif($this->getViewMode() == 'list'):?>
+<div class="sam-block">
+	<div class="sam-block-title">
+    	<strong><span><a href="<?php echo $this->getUrl('news');?>" title="<?php echo $this->__('Latest News'); ?>"><?php echo $this->__('Latest News'); ?></a></span></strong>
+    </div>
+    <div id="sam_scroller_list" class="sam-block-content">
+    	<?php foreach ($news as $_news): ?>
+        	<div class="sam_scroller_item">
+            	<div class="sam_list_item">
+                	<div class="sam_scroller_item_pimage">
+                    	<a href="<?php echo $_news->getNewsUrl();?>" title="<?php echo $_news->getTitle(); ?>"><?php /*?><img src="<?php echo $_news->getThumbnailImage();?>" alt="<?php echo $_news->getTitle(); ?>"  width="40" height="40"/><?php */?>
+                        <img src="<?php echo Mage::helper('news/image')->getImageresize($_news->getImage(),'small',40,40);?>" alt="<?php echo $_news->getTitle(); ?>"  width="40" height="40"/>
+                        
+                        </a>
+                    </div>
+                    <div class="sam_scroller_item_info">
+                    	<div class="sam_scroller_item_pname">
+                        	<a href="<?php echo $_news->getNewsUrl();?>" title="<?php echo $_news->getTitle(); ?>"><?php echo $_news->getTitle(); ?></a>
+                        </div>
+                    </div>
+                    <div class="sam_news_item_clear"></div>
+                    <div>
+                        <div><?php echo $_news->getShortDescription();?></div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach;?>
+        <div class="sam-block-list-title">
+            <strong class="sam-block-list-title-bottom" style="float:right;">
+                <a href="<?php echo $this->getUrl('news');?>"><?php echo $this->__('View All'); ?></a>
+            </strong>
+    	</div>
+    </div>
+</div>
+<div class="sam_news_item_clear" style="width:100%;"></div>
+<?php elseif($this->getViewMode() == 'scroller'):?>
+<div class="sam-block">
+	<div class="sam-block-title">
+    	<strong><span><a href="<?php echo $this->getUrl('news');?>" title="<?php echo $this->__('Latest News'); ?>"><?php echo $this->__('Latest News'); ?></a></span></strong>
+    </div>
+    <div id="sam_news_scrollbar" class="sam-block-content">
+    	<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+        <div class="viewport">
+			 <div class="overview">
+    	<?php foreach ($news as $_news): ?>
+        	<div class="sam_scroller_scrollitem">
+            	<div class="sam_scroller_item">
+                	<div class="sam_scroller_item_pimage">
+                    	<a href="<?php echo $_news->getNewsUrl();?>" title="<?php echo $_news->getTitle(); ?>"><img src="<?php echo Mage::helper('news/image')->getImageresize($_news->getImage(),'small',40,40);?>" alt="<?php echo $_news->getTitle(); ?>"  width="40" height="40"/></a>
+                    </div>
+                    <div class="sam_scroller_item_info">
+                    	<div class="sam_scroller_item_pname">
+                        	<a href="<?php echo $_news->getNewsUrl();?>" title="<?php echo $_news->getTitle(); ?>"><?php echo $_news->getTitle(); ?></a>
+                        </div>
+
+                    </div>
+                    <div class="sam_news_item_clear"></div>
+                    <div>
+                        <div><?php echo $_news->getShortDescription();?></div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach;?>
+        </div>
+        </div>
+    </div>
+    <div class="sam-block-title">
+        <strong class="sam-block-title-bottom" style="float:right;">
+        	<a href="<?php echo $this->getUrl('news');?>"><?php echo $this->__('View All'); ?></a>
+        </strong>
+    </div>
+</div>
+<div class="sam_news_item_clear" style="width:100%;"></div>
+<?php endif;?>
+<?php endif;?>
+
+

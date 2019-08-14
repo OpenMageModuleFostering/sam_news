@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/Sam_News",
+    "type": "magento-module",
+    "license": "OSL-v3.0",
+    "homepage": "",
+    "description": "This extension is for the news extension to get the attention of the customers.",
+    "authors": [
+    {
+        "name": "Saurabh Sutariya",
+        "email": "saurabh.sutariya664@gmail.com"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

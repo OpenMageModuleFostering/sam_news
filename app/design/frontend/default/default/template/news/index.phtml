@@ -1,0 +1,32 @@
+<?php $_newsCollection = $this->getLoadedNewsCollection();?>
+
+<?php if(!$_newsCollection->count()): ?>
+<p class="note-msg"><?php echo $this->__('There are no published news.') ?></p>
+<?php else: ?>
+	<div class="sam-news-title">
+    	<h2><?php echo $this->__('Our News');?></h2>
+    </div>
+    
+    <?php echo $this->getPagerHtml(); ?>
+    
+	<?php foreach($_newsCollection as $_news):?>
+    <div class="sam_news_item">
+            <div class="sam_news_item_image">
+                <a href="<?php echo $_news->getNewsUrl();?>" title="<?php echo $_news->getTitle(); ?>"><img src="<?php echo Mage::helper('news/image')->getImageresize($_news->getImage(),'thumb',100,100);?>" alt="<?php echo $_news->getTitle(); ?>"  width="100" height="100"/></a>
+            </div>
+            <div class="sam_news_item_info">
+            	<div class="sam_news_item_pname">
+                	<a href="<?php echo  $_news->getNewsUrl();?>" title="<?php echo $_news->getTitle(); ?>">
+                    <?php echo $_news->getTitle();?>
+                    </a>
+                </div>
+                
+                <div class="sam_news_item_detail"><?php echo $_news->getShortDescription();?></div>
+                <p><a href="<?php echo $_news->getNewsUrl();?>" title="<?php echo $this->__('Read More'); ?>"><?php echo $this->__('Read More'); ?></a></p>
+                <div class="sam_news_item_nickname"><?php echo $this->__('Created at - '). $_news->getCreatedTime();?></div>
+            </div>
+            <div class="sam_news_item_clear"></div>
+        </div>
+    <?php endforeach;?>
+    <?php echo $this->getPagerHtml(); ?>
+<?php endif; ?>

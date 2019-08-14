@@ -1,0 +1,13 @@
+<div class="sam-news-title">
+	<h2><?php echo $this->getTitle();?></h2>
+</div>
+<?php if($this->hasImage()): ?>
+<div class="sam-news-view-image sam-img-polaroid">
+	<img src="<?php echo Mage::helper('news/image')->getImageresize($this->getImage(),'image',300,200);?>" width="300" height="200" title="<?php echo $this->getTitle(); ?>"/>
+</div>
+<?php endif; ?>
+<span class="sam-date"><?php echo $this->getNewsCreatedTime(); ?></span>
+<div class="sam-description">
+<?php echo $this->getDescription(); ?>
+</div>
+<p><a href="<?php echo $this->getAllNewsUrl();?>" title="<?php echo $this->__('All News');?>"><?php echo $this->__('All News >>');?></a></p>
