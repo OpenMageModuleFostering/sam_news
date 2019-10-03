@@ -1,7 +1,7 @@
 {
-    "name": "OpenMageModuleFostering\/Sam_News",
+    "name": "openmage-module-fostering\/sam_news",
     "type": "magento-module",
-    "license": "OSL-v3.0",
+    "license": "OSL-3.0",
     "homepage": "",
     "description": "This extension is for the news extension to get the attention of the customers.",
     "authors": [
